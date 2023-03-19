@@ -12,6 +12,7 @@ console.log(startBtnEll);
 console.log(stopBtnEll);
 
 let actStartBtn = false;
+let timerId = null;
 
 startBtnEll.addEventListener('click', () => {
     if (!actStartBtn) {

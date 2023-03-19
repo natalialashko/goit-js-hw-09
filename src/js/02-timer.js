@@ -12,6 +12,7 @@ const refsDate = {
 const startBtnEll = document.querySelector('button[data-start]');
 console.log(startBtnEll);
 let actStartBtn = false;
+
 startBtnEll.style.color = '#C0C0C0';
 let ms = 0;
 
@@ -63,13 +64,14 @@ console.log('defaultDate - ', options.defaultDate);
 
 const timer = {
     idInt: null,
+    
     start() {
-        
+       
         const startTime = Date.now() + ms;
         this.idInt = setInterval(() => {
             const currentTime = Date.now();
             const deltaTime = startTime - currentTime;
-            console.log(deltaTime);
+            actStartBtn = false;
             if (deltaTime >= 0) {
                         
                 const timeComponents = convertMs(deltaTime);
@@ -78,17 +80,22 @@ const timer = {
             } else {
                 this.stop();
                 return;
-                 }
+            }
         }, 1000);
     
     },
     stop() {
-      clearInterval(this.idInt)  
+        
+        clearInterval(this.idInt)
     }
-}
-startBtnEll.addEventListener('click', () => {
-    timer.start();
-});
+};
+
+    startBtnEll.addEventListener('click', () => {
+       if (actStartBtn) {
+        timer.start();
+       }   
+    });
+
 function upDateTimer({ days, hours, minutes, seconds }) {
     refsDate.dateDaysEll.textContent = days;
     refsDate.dateHoursEll.textContent = hours;
